@@ -9,10 +9,10 @@ import time
 
 
 def probe_server(url):
-    
+    print("todo")
 
 def get_vars():
-    if (len(sys.argv < 3)):
+    if (len(sys.argv) < 3):
         return input("Enter a URL: "), input("Enter a samples file name: ")
     else:
         return sys.argv[1], sys.argv[2]
