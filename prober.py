@@ -6,10 +6,18 @@ Large Scale Web Apps, Fall 2016
 
 import sys
 import time
+import urllib.request
+
 
 
 def probe_server(url):
-    print("todo")
+    request = urllib.request.Request(url)
+    try:
+        response = urllib.request.urlopen(request).status
+        print(response)
+        return response
+    except urllib.error.URLError:
+            return str(-1)
 
 def get_vars():
     if (len(sys.argv) < 3):
@@ -20,15 +28,18 @@ def get_vars():
 def main():
     url, samples = get_vars()
     samples_file = open(samples, 'w')
-    saved_time = int(time.time())
+    samples_file.write("URL = " + url)
+    current_time = int(time.time())
     while True: # infinite loop until interrupted
         try:
-            if (int(time.time()) - saved_time >= 30):
-                response = probe_server(url) # sends get request to server, returns a response
+            if (int(time.time()) - current_time >= 30):
+                response = probe_server(url) 
+                #print(response)
                 write_line = str(int(time.time())) + "," + str(response) + "\n"
-                saved_time = int(time.time())
+                samples_file.write(write_line)
+                current_time = int(time.time())                   
         except (KeyboardInterrupt, SystemExit):
-                file.close()
+                samples_file.close()
                 break
 
 main()
