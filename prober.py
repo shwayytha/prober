@@ -38,7 +38,7 @@ def main():
         try:
             if (int(time.time()) - current_time >= 30):
                 response = probe_server(url) 
-                print(response)
+#                print(response)
                 write_line = str(int(time.time())) + ", " + str(response) + "\n"
                 samples_file.write(write_line)
                 samples_file.flush() # prints immediately to file
